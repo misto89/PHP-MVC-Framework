@@ -1,1 +1,1 @@
-This folder must contain all system icons.
+This folder must contain all system's icons.
