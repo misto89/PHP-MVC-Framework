@@ -1,8 +1,9 @@
 PHP-MVC-Framework
 =================
 
-A simple php framework implements Model-View-Controller pattern.
+This is a simple php framework that can be used to develop web applications using the Model-View-Controller pattern.
 
-Tested with Apache 2 Web Server.
+- Tested with Apache 2 Web Server.
+- Require module "mod_rewrite" running on the server.
 
-Require the module "mod_rewrite" enable on the server.
+Made by Michele Stolfa
