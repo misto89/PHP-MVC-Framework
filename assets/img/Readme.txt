@@ -1,1 +1,1 @@
-This folder contains all system's images.
+This folder must contain all system's images.

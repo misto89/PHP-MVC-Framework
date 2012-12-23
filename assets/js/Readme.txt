@@ -1,1 +1,1 @@
-This folder contains all javascript files.
+This folder must contain all javascript files.

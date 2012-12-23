@@ -1,1 +1,1 @@
-This folder contains, for each controller, a folder contains all possible Views for that controller.
+This folder must contain, for each controller, a folder contains all possible Views for that controller. The "header.php" and "footer.php" files, are common for each view.

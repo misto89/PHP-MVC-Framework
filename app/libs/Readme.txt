@@ -1,1 +1,1 @@
-This folder contains all framework classes.
+This folder contains all framework's classes.

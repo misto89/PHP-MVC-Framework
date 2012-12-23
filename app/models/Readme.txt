@@ -1,1 +1,1 @@
-This folder contains all system's Models.
+This folder must contain all system's Models.

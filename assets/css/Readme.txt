@@ -1,1 +1,1 @@
-This folder contains all css files.
+This folder must contain all css files.

@@ -1,0 +1,1 @@
+This folder must contain files needed for building GUI application.
