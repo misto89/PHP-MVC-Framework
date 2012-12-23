@@ -1,1 +1,1 @@
-This folder contains, for each controller, a folder contains all possible Views for this controller.
+This folder contains, for each controller, a folder contains all possible Views for that controller.
