@@ -1,1 +1,1 @@
-This folder contains all system's Controllers.
+This folder contains all system's Controllers with the convention that each controller terms with the suffix "Controller".
