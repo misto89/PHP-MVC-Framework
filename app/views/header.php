@@ -28,7 +28,7 @@ if (isset($this->_css)) {
 
 		<!-- Masthead================================================== -->
 		<header class="jumbotron masthead">
-			<div class="inner">PHP - MVC Framework v1.0</div>
+			<div class="inner">PHP - MVC Framework v1.1</div>
 
 			<!-- <div class="bs-links"></div> -->
 		</header><br>

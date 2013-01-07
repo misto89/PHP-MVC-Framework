@@ -1,11 +1,11 @@
 <?php
 
 // Always provide a TRAILING SLASH (/) AFTER A PATH
-define('URL', '/mvc/');
+define('URL', '/PHP-MVC-Framework/');
 define('CONTROLLER_SUFFIX','Controller');
-define('LIBS', 'app/libs/');
-define('MODELS','app/models/');
-define('CONTROLLER_PATH', 'app/controllers/');
+define('LIBS_PATH', 'app/libs/');
+define('MODELS_PATH','app/models/');
+define('CONTROLLERS_PATH', 'app/controllers/');
 define('VIEWS_PATH', 'app/views/');
 define('IMAGE_PATH', URL . 'assets/img/');
 define('ICON_PATH', URL . 'assets/ico/');

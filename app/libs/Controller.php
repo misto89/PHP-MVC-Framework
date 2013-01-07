@@ -25,7 +25,7 @@ class Controller {
 	/**
 	 * Initialize the basic Controller.
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->_view = new View();
 	}
 	

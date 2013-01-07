@@ -11,7 +11,7 @@ class IndexController extends Controller {
 	/**
 	 * Construct an IndexController
 	 */
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 	}
 	

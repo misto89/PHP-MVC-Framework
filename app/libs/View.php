@@ -25,7 +25,7 @@ class View {
 	/**
 	 * View constructor. Initializes javascript and css files for all views.
 	 */
-	function __construct() {
+	public function __construct() {
 		$this->_js = array();
 		$this->_css = array();
 	}

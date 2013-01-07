@@ -1,86 +1,142 @@
 <?php
 
 /**
- * This class is used to manage HTTP request. Require Apache's mod_rewrite.
- * Requests must be expressed in the format "controllerName/methodName/optionalParameter".
+ * This class is used to handle HTTP request. Require Apache's mod_rewrite.
+ * Requests must be expressed in the format "controllerName/methodName/optionalParameters".
  * 
  * @author Michele Stolfa
- * @version 1.0
+ * @version 1.1
  */
 class Bootstrap {
 	
 	/**
+	 * The requested url in array form.
+	 * 
+	 * @var array
+	 */
+	private $url;
+	
+	/**
+	 * The instantiated controller.
+	 * 
+	 * @var Controller subclass
+	 */
+	private $controller;
+	
+	/**
 	 * For each request, an object of this class determines and instantiates 
  	 * the controller can handle it, and then invokes a method of this controller.
- 	 * If controller or method not exists, it show an error page. 
+ 	 * If controller or method not exists, an error page is displayed. 
  	 * If request doesn't specify any controller, an IndexController is instantiated and the method index() is invoked. 
- 	 * In this case, the application's index page is shown to the user.
+ 	 * In this case, the application's index page is displayed to the user.
 	 */
-	function __construct() {
+	public function __construct() {
 
-		$url = isset($_GET['url']) ? $_GET['url'] : null;
-		$url = rtrim($url, '/');
-		$url = filter_var($url, FILTER_SANITIZE_URL);
-		$url = explode('/', $url);
-
+		$this->getUrl();
 		
-		if (empty($url[0])) {
-			require CONTROLLER_PATH . 'IndexController.php';
-			$controller = new IndexController();
-			$controller->index();
-			return false;
+		//No controller is specified.
+		if (empty($this->url[0])) {
+			$this->loadDefaultController();
+			return;
 		}
 
-		$controller_name = ucfirst($url[0]) . CONTROLLER_SUFFIX;
-		//build to the controller file reference
-		$controller_path = CONTROLLER_PATH . $controller_name . '.php';
-
-		if (file_exists($controller_path)) {
-			require $controller_path;
-		} else {
-			return $this->error();
-		}
-
-		try {
-			$controller = new $controller_name;
-		} catch (Exception $e) {
-			$this->error($e->getMessage());
-		}
-
-		try {
-			// calling methods
-			if (isset($url[2])) {
-				if (method_exists($controller, $url[1])) {
-					$controller->{$url[1]}($url[2]);
-				} else {
-					$this->error();
-				}
-				
-			} else {
-				if (isset($url[1])) {
-					if (method_exists($controller, $url[1])) {
-						$controller->{$url[1]}();
-					} else {
-						$this->error();
-					}
-					
-				} else {
-					$controller->index();
-				}
-			}
-		} catch (QueryException $e) {
-			$this->error($e->getMessage());
-		}
+		$this->loadCurrentController();
+		$this->callControllerMethod();
 
 	}
 
+	/**
+	 * Invoke the requested method.
+	 */
+	private function callControllerMethod() {
+		try {
+			
+			if (isset($this->url[1])) {
+				if (method_exists($this->controller, $this->url[1])) {
+						
+					$parameters = array();
+					for ($i = 2; $i < count($this->url); $i++)
+						array_push($parameters, $this->url[$i]);
+							
+					$countParam = count($parameters);
+					
+					if ($countParam == 0)
+						$this->controller->{$this->url[1]}();
+					else if ($countParam == 1)
+						$this->controller->{$this->url[1]}($parameters[0]);
+					else
+						$this->controller->{$this->url[1]}($parameters);
+						
+				} else { //Method not found.
+					$this->error();
+				}
+			
+			} else { //No method is specified.
+				$this->controller->index(); 
+			}
+					
+		} catch (QueryException $e) {
+			$this->error($e->getMessage() . " ( " . $e->getFile() . ": line  " . $e->getLine() . ")");
+			
+		} catch (Exception $e) {
+			$msg = $e->getMessage();
+			if ($msg == "")
+				$msg = "An error occuring during execution";
+			
+			$this->error($msg . " ( " . $e->getFile() . ": line  " . $e->getLine() . ")");
+		}
+	}
+	
+	/**
+	 * Load the requested controller.
+	 */
+	private function loadCurrentController() {
+		$controller_name = ucfirst($this->url[0]) . CONTROLLER_SUFFIX;
+		$controller_path = CONTROLLERS_PATH . $controller_name . '.php';
+		
+		if (file_exists($controller_path)) {
+			require $controller_path;
+		} else { //Controller not found.
+			$this->error(); 
+		}
+		
+		try {
+			$this->controller = new $controller_name;
+		} catch (Exception $e) { //Any error.
+			$msg = $e->getMessage();
+			if ($msg == "")
+				$msg = "An error occuring during execution";
+			
+			$this->error($msg . " ( " . $e->getFile() . ": line  " . $e->getLine() . ")");
+		}
+	}
+	
+	/**
+	 * Load an IndexController showing the index page to the user.
+	 */
+	private function loadDefaultController() {
+		require CONTROLLERS_PATH . 'IndexController.php';
+		$controller = new IndexController();
+		$controller->index();
+	}
+	
+	/**
+	 * Initializes $this->url array.
+	 */
+	private function getUrl() {
+		$url = isset($_GET['url']) ? $_GET['url'] : null;
+		$url = rtrim($url, '/');
+		$url = filter_var($url, FILTER_SANITIZE_URL);
+		$this->url = explode('/', $url);
+	}
+	
 	/**
 	 * Show the error page, with an error message.
 	 * 
 	 * @param string $msg The error message to be displayed.
 	 */
 	private function error($msg = null) {
-		require CONTROLLER_PATH . 'ErrorController.php';
+		require CONTROLLERS_PATH . 'ErrorController.php';
 		$controller = new ErrorController();
 		if ($msg == null)
 			$msg = "404 Page not found";

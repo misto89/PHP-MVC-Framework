@@ -11,7 +11,7 @@ class ErrorController extends Controller {
 	/**
 	 * Construct an ErrorController
 	 */
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 	}
 	

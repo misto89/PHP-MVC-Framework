@@ -12,7 +12,7 @@ class QueryException extends Exception {
 	 * 
 	 * @param string $message The exception message
 	 */
-	function __construct($message) {
+	public function __construct($message) {
 		parent::__construct($message);
 	}
 }
