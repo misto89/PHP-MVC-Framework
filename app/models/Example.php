@@ -53,7 +53,6 @@ class Example extends Model {
 	 */
 	public function getExampleData() {
 		//Query database using $this->_dao variable
-			
 		
 		return array(
 				'msg' => "This is the example page.",
