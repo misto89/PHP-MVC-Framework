@@ -1,12 +1,18 @@
 
-<!-- Footer
-      ================================================== -->
-<br><br>
-<footer class="footer">
+<footer>
 	Made by Michele Stolfa
 </footer>
 
-</div>
+<?php 
+
+if (isset($this->_js)) {
+	foreach ($this->_js as $js) {
+		echo '<script src="' . JS_PATH . $js .'.js"></script>';
+
+	}
+}
+
+?>
 
 </body>
 </html>

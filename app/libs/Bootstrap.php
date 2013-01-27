@@ -31,7 +31,7 @@ class Bootstrap {
  	 * In this case, the application's index page is displayed to the user.
 	 */
 	public function __construct() {
-
+		
 		$this->getUrl();
 		
 		//No controller is specified.
@@ -116,8 +116,31 @@ class Bootstrap {
 	 */
 	private function loadDefaultController() {
 		require CONTROLLERS_PATH . 'IndexController.php';
-		$controller = new IndexController();
-		$controller->index();
+		
+		try {
+			$controller = new IndexController();
+			
+		} catch (Exception $e) { //Any error.
+			$msg = $e->getMessage();
+			if ($msg == "")
+				$msg = "An error occuring during execution";
+			
+			$this->error($msg . " ( " . $e->getFile() . ": line  " . $e->getLine() . ")");
+		}
+		
+		try {
+			$controller->index();
+			
+		} catch (QueryException $e) {
+			$this->error($e->getMessage() . " ( " . $e->getFile() . ": line  " . $e->getLine() . ")");
+				
+		} catch (Exception $e) {
+			$msg = $e->getMessage();
+			if ($msg == "")
+				$msg = "An error occuring during execution";
+				
+			$this->error($msg . " ( " . $e->getFile() . ": line  " . $e->getLine() . ")");
+		}
 	}
 	
 	/**
@@ -139,7 +162,7 @@ class Bootstrap {
 		require CONTROLLERS_PATH . 'ErrorController.php';
 		$controller = new ErrorController();
 		if ($msg == null)
-			$msg = "404 Page not found";
+			$msg = "Error 404: The requested page not exists";
 		
 		$controller->index(base64_encode($msg));
 	}

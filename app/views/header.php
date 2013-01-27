@@ -4,12 +4,6 @@
 <title></title>
 
 <?php
-if (isset($this->_js)) {
-	foreach ($this->_js as $js) {
-		echo '<script src="' . JS_PATH . $js .'.js"></script>';
-
-	}
-}
 
 if (isset($this->_css)) {
 	foreach ($this->_css as $css) {
@@ -17,18 +11,11 @@ if (isset($this->_css)) {
 
 	}
 }
+
 ?>
 
 </head>
 
 <body>
-	<?php Session::init();?>
-
-	<div class="container">
-
-		<!-- Masthead================================================== -->
-		<header class="jumbotron masthead">
-			<div class="inner">PHP - MVC Framework v1.1</div>
-
-			<!-- <div class="bs-links"></div> -->
-		</header><br>
+	
+	<div>PHP - MVC Framework v1.1</div>
