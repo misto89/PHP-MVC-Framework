@@ -17,5 +17,9 @@ if (isset($this->_css)) {
 </head>
 
 <body>
+	<a href="<?php echo URL . 'local/change/it_IT/?request=' . $_SERVER['REQUEST_URI'] ?>">ITA</a> <!-- Change local language in Italian -->
+	<a href="<?php echo URL . 'local/change/en_EN/?request=' . $_SERVER['REQUEST_URI'] ?>">ENG</a> <!-- Change local language in English -->
 	
-	<div>PHP - MVC Framework v1.1</div>
+	<br><br>
+	
+	<div>PHP - MVC Framework v1.2</div>

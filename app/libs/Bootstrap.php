@@ -5,7 +5,7 @@
  * Requests must be expressed in the format "controllerName/methodName/optionalParameters".
  * 
  * @author Michele Stolfa
- * @version 1.1
+ * @version 1.2
  */
 class Bootstrap {
 	
@@ -31,6 +31,10 @@ class Bootstrap {
  	 * In this case, the application's index page is displayed to the user.
 	 */
 	public function __construct() {
+		
+		Session::init();
+		if (!Session::get('local'))
+			Session::set('local', DEFAULT_LANGUAGE);
 		
 		$this->getUrl();
 		

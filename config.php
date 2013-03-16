@@ -11,6 +11,7 @@ define('IMAGE_PATH', URL . 'assets/img/');
 define('ICON_PATH', URL . 'assets/ico/');
 define('CSS_PATH', URL . 'assets/css/');
 define('JS_PATH', URL . 'assets/js/');
+define('LANG_PATH', 'app/lang/');
 
 define('DB_TYPE', '');
 define('DB_HOST', '');
@@ -30,6 +31,8 @@ define('SINGLE_QUOTE', "'");
 
 define('DOUBLE_SLASH', "\\\\");
 define('SINGLE_SLASH', "\\");
+
+define('DEFAULT_LANGUAGE', 'en_EN');
 
 /**
  * Push a new "$key => $value" in an existing associative array.

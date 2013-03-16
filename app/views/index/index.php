@@ -1,3 +1,3 @@
 <!-- This is the index page view -->
-<p>This is the index page.</p>
-<p>View the <a href="<?php echo URL . "example" ?>" >example</a> page.</p>
+<p><?php echo $this->_translator->translate('index.welcome_text'); ?></p>
+<p><?php echo $this->_translator->translate('index.example_text'); ?></p>

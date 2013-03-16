@@ -4,9 +4,16 @@
  * This class represents a view, and it is used to make any view.
  * 
  * @author Michele Stolfa
- * @version 1.0
+ * @version 1.1
  */
 class View {
+	
+	/**
+	 * An object of Translator class.
+	 * 
+	 * @var Translator The current translator
+	 */
+	private $_translator;
 
 	/**
 	 * Contains the javascript files needed for all views.
@@ -23,9 +30,10 @@ class View {
 	private $_css;
 	
 	/**
-	 * View constructor. Initializes javascript and css files for all views.
+	 * View constructor. Initializes javascript and css files for all views, and the translator for strings.
 	 */
 	public function __construct() {
+		$this->_translator = new Translator(Session::get('local'));
 		$this->_js = array();
 		$this->_css = array();
 	}

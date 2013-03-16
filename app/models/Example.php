@@ -4,7 +4,7 @@
  * This class is a template that help building new model.
  * 
  * @author Michele Stolfa
- * @version 1.0
+ * @version 1.1
  */
 class Example extends Model {
 	
@@ -55,7 +55,7 @@ class Example extends Model {
 		//Query database using $this->_dao variable
 		
 		return array(
-				'msg' => "This is the example page.",
+				'msg' => "example.welcome_text",
 				'controller' => IMAGE_PATH . "ExampleController.jpg",
 				'model' => IMAGE_PATH . "ExampleModel.jpg",
 				'view' => IMAGE_PATH . "ExampleView.jpg"

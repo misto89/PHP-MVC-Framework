@@ -1,6 +1,6 @@
 <!-- Write your html code here (only body's body) -->
 
-<p><?php echo $data['msg'] ?></p>
+<p><?php echo $this->_translator->translate($data['msg']) ?></p>
 <br></br>
 File app/controller/ExampleController.php:<br><br>
 
